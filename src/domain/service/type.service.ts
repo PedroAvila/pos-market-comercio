@@ -24,4 +24,8 @@ export class TypeService {
     const newType = this.typeRepository.create(type);
     return await this.typeRepository.save(newType);
   }
+
+  async getTypes() {
+    return await this.typeRepository.find();
+  }
 }
