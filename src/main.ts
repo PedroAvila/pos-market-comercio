@@ -7,7 +7,7 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('Nombre de tu API')
+    .setTitle('pos')
     .setDescription('Descripción de tu API')
     .setVersion('1.0')
     .build();
