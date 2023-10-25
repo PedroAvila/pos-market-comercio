@@ -17,6 +17,10 @@ import { TypeModule } from './modules/type.module';
       database: 'market',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      options: {
+        encrypt: true, // Opciones de cifrado, si es necesario
+        trustServerCertificate: false, // Opciones adicionales, si es necesario
+      },
     }),
     UserModule,
     TypeModule,
