@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'posapimarket'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9F3704CBED1D4048AD438AF14FFFB32F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_298CA019B63649A68C8B3FD5F1369410 }}
           package: .
