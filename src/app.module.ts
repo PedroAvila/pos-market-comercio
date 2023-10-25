@@ -18,8 +18,8 @@ import { TypeModule } from './modules/type.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       options: {
-        encrypt: true, // Opciones de cifrado, si es necesario
-        trustServerCertificate: false, // Opciones adicionales, si es necesario
+        encrypt: true, // Opciones de cifrado
+        trustServerCertificate: false, // Opciones adicionales,
       },
     }),
     UserModule,
