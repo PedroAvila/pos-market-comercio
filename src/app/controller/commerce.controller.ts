@@ -9,11 +9,13 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateCommerceDto } from 'src/domain/dto/create-commerce.dto';
 import { UpdateCommerceDto } from 'src/domain/dto/update-commerce.dto';
 import { Commerce } from 'src/domain/entities/commerce.entity';
 import { CommerceService } from 'src/domain/service/commerce.service';
 
+@ApiTags('Commerce')
 @Controller('commerce')
 export class CommerceController {
   constructor(private commerceService: CommerceService) {}

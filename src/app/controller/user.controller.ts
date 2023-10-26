@@ -13,7 +13,9 @@ import { CreateUserDto } from '../../domain/dto/create-user.dto';
 import { UserService } from '../../domain/service/user.service';
 import { User } from '../../domain/entities/user.entity';
 import { UpdateUserDto } from '../../domain/dto/update-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
