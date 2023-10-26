@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Type } from '../entities/type.entity';
 import { Repository } from 'typeorm';
 import { CreateTypeDto } from '../dto/create-type.dto';
+import { UpdateTypeDto } from '../dto/update-type.dto';
 
 @Injectable()
 export class TypeService {
@@ -41,5 +42,29 @@ export class TypeService {
       return new HttpException('Type not found', HttpStatus.NOT_FOUND);
     }
     return typeFound;
+  }
+
+  async deleteType(id: number) {
+    const result = await this.typeRepository.delete({ TypeId: id });
+
+    if (result.affected === 0) {
+      return new HttpException('Type not found', HttpStatus.NOT_FOUND);
+    }
+    return result;
+  }
+
+  async updateType(id: number, type: UpdateTypeDto) {
+    const typeFound = await this.typeRepository.findOne({
+      where: {
+        TypeId: id,
+      },
+    });
+
+    if (!typeFound) {
+      return new HttpException('Type not found', HttpStatus.NOT_FOUND);
+    }
+
+    const updateType = Object.assign(typeFound, type);
+    return this.typeRepository.save(updateType);
   }
 }
