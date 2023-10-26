@@ -14,8 +14,8 @@ export class Commerce {
   @PrimaryGeneratedColumn()
   CommerceId: number;
 
-  @Column()
-  Nombre: string;
+  @Column({ unique: true })
+  Name: string;
 
   @ManyToOne(() => Type, (type) => type.Commerces)
   @JoinColumn({ name: 'TypeId' })

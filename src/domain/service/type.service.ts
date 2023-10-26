@@ -7,7 +7,8 @@ import { CreateTypeDto } from '../dto/create-type.dto';
 @Injectable()
 export class TypeService {
   constructor(
-    @InjectRepository(Type) private typeRepository: Repository<Type>,
+    @InjectRepository(Type)
+    private typeRepository: Repository<Type>,
   ) {}
 
   async createType(type: CreateTypeDto) {
@@ -27,5 +28,18 @@ export class TypeService {
 
   async getTypes() {
     return await this.typeRepository.find();
+  }
+
+  async getType(id: number) {
+    const typeFound = await this.typeRepository.findOne({
+      where: {
+        TypeId: id,
+      },
+    });
+
+    if (!typeFound) {
+      return new HttpException('Type not found', HttpStatus.NOT_FOUND);
+    }
+    return typeFound;
   }
 }

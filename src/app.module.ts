@@ -4,10 +4,10 @@ import { AppService } from './app.service';
 import { UserModule } from './modules/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeModule } from './modules/type.module';
+import { CommerceModule } from './modules/commerce.module';
 
 @Module({
   imports: [
-    TypeModule,
     TypeOrmModule.forRoot({
       type: 'mssql',
       host: 'my-friends.database.windows.net',
@@ -24,6 +24,7 @@ import { TypeModule } from './modules/type.module';
     }),
     UserModule,
     TypeModule,
+    CommerceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
