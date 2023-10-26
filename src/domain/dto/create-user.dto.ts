@@ -8,7 +8,7 @@ export class CreateUserDto {
     name: 'Name',
     type: 'string',
     required: true,
-    description: 'nombre del usuario',
+    description: 'user name',
     example: 'Ramón',
   })
   Name: string;

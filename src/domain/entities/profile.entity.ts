@@ -12,7 +12,7 @@ export class Profile {
   @PrimaryGeneratedColumn()
   ProfileId: number;
 
-  @Column()
+  @Column({ unique: true })
   Name: string;
 
   @ManyToMany(() => User, (user) => user.profiles)
