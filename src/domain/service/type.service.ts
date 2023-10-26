@@ -65,6 +65,6 @@ export class TypeService {
     }
 
     const updateType = Object.assign(typeFound, type);
-    return this.typeRepository.save(updateType);
+    return await this.typeRepository.save(updateType);
   }
 }

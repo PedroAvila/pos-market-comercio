@@ -4,9 +4,10 @@ import { CommerceService } from 'src/domain/service/commerce.service';
 import { Commerce } from 'src/domain/entities/commerce.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeModule } from './type.module';
+import { ProfileModule } from './profile.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Commerce]), TypeModule],
+  imports: [TypeOrmModule.forFeature([Commerce]), TypeModule, ProfileModule],
   controllers: [CommerceController],
   providers: [CommerceService],
 })
