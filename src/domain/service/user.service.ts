@@ -4,26 +4,48 @@ import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { ProfileService } from './profile.service';
+import { CommerceService } from './commerce.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private commerceService: CommerceService,
+    private profileService: ProfileService,
   ) {}
 
   async createUser(user: CreateUserDto) {
+    const commerceFound = await this.commerceService.getCommerce(
+      user.CommerceId,
+    );
     const userFound = await this.userRepository.findOne({
       where: {
-        FullName: user.Name,
+        FullName: user.FullName,
       },
     });
+
+    if (!commerceFound) {
+      return new HttpException('Commerce not found', HttpStatus.NOT_FOUND);
+    }
 
     if (userFound) {
       return new HttpException('User alredy exists', HttpStatus.CONFLICT);
     }
 
-    const newUser = this.userRepository.create(user);
+    var profileIds = await this.profileService.getProfileIds(user.Profiles);
+    const entity = new User();
+    /* entity.CommerceId = user.CommerceId;
+    entity.UserName = user.UserName;
+    entity.FullName = user.FullName;
+    entity.Password = user.Password;
+    entity.Email = user.Email;
+    entity.Phone = user.Phone;
+    entity.Status = user.Status; */
+    entity.profiles = profileIds;
+
+    const newUser = this.userRepository.create(Object.assign(entity, user));
     return await this.userRepository.save(newUser);
   }
 
