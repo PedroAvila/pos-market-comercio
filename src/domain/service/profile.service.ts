@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from '../entities/profile.entity';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { CreateProfileDto } from '../dto/create-profile.dto';
 import { UpdateProfileDto } from '../dto/update-profile.dto';
 
@@ -42,6 +42,27 @@ export class ProfileService {
       return new HttpException('Profile not found', HttpStatus.NOT_FOUND);
     }
     return profileFound;
+  }
+
+  async getProfileIds(profiles: number[]) {
+    const listProfiles = await this.profileRepository.find({
+      where: {
+        ProfileId: In(profiles),
+      },
+    });
+    console.log(listProfiles);
+
+    const idsFound = (await listProfiles).map((profile) => profile.ProfileId);
+    const missingIds = profiles.filter((id) => !idsFound.includes(id));
+
+    if (missingIds.length > 0) {
+      throw new HttpException(
+        `IDs not found: ${missingIds.join(', ')}`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return listProfiles;
   }
 
   async deleteProfile(id: number) {

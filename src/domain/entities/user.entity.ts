@@ -1,4 +1,3 @@
-import exp from 'constants';
 import {
   Entity,
   Column,
@@ -17,6 +16,9 @@ export class User {
   UserId: number;
 
   @Column()
+  CommerceId: number;
+
+  @Column()
   UserName: string;
 
   @Column()
@@ -24,6 +26,12 @@ export class User {
 
   @Column()
   Password: string;
+
+  @Column()
+  Email?: string;
+
+  @Column()
+  Phone?: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   CreationDate: Date;

@@ -8,13 +8,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
-  /* const config = new DocumentBuilder()
-    .setTitle('pos')
-    .setDescription('Descripción de tu API')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document); */
 
   const config = new DocumentBuilder()
     .setTitle('pos')

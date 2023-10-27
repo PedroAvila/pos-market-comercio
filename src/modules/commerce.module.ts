@@ -10,5 +10,6 @@ import { ProfileModule } from './profile.module';
   imports: [TypeOrmModule.forFeature([Commerce]), TypeModule, ProfileModule],
   controllers: [CommerceController],
   providers: [CommerceService],
+  exports: [CommerceService],
 })
 export class CommerceModule {}
