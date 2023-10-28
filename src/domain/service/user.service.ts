@@ -7,6 +7,8 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { ProfileService } from './profile.service';
 import { CommerceService } from './commerce.service';
 
+import * as bcryptjs from 'bcryptjs';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -22,7 +24,8 @@ export class UserService {
     );
     const userFound = await this.userRepository.findOne({
       where: {
-        FullName: user.FullName,
+        Email: user.Email,
+        CommerceId: user.CommerceId,
       },
     });
 
@@ -36,14 +39,8 @@ export class UserService {
 
     var profileIds = await this.profileService.getProfileIds(user.Profiles);
     const entity = new User();
-    /* entity.CommerceId = user.CommerceId;
-    entity.UserName = user.UserName;
-    entity.FullName = user.FullName;
-    entity.Password = user.Password;
-    entity.Email = user.Email;
-    entity.Phone = user.Phone;
-    entity.Status = user.Status; */
     entity.profiles = profileIds;
+    user.Password = await bcryptjs.hash(user.Password, 10);
 
     const newUser = this.userRepository.create(Object.assign(entity, user));
     return await this.userRepository.save(newUser);
@@ -64,6 +61,17 @@ export class UserService {
       return new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
 
+    return userFound;
+  }
+
+  async getEmail(commerceId: number, user: string) {
+    const userFound = await this.userRepository.findOne({
+      where: {
+        CommerceId: commerceId,
+        UserName: user,
+      },
+      relations: ['profiles'],
+    });
     return userFound;
   }
 
