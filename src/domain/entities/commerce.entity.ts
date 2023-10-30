@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Type } from './type.entity';
 import { User } from './user.entity';
+import { Table } from './table.entity';
 
 @Entity({ name: 'Commerces' })
 export class Commerce {
@@ -23,4 +24,7 @@ export class Commerce {
 
   @OneToMany(() => User, (user) => user.Commerce)
   Users: User[];
+
+  @OneToMany(() => Table, (table) => table.Commerce)
+  Tables: Table[];
 }
