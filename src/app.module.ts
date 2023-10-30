@@ -7,6 +7,7 @@ import { TypeModule } from './modules/type.module';
 import { CommerceModule } from './modules/commerce.module';
 import { ProfileModule } from './modules/profile.module';
 import { AuthModule } from './auth/auth.module';
+import { TableModule } from './modules/table.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
     CommerceModule,
     ProfileModule,
     AuthModule,
+    TableModule,
   ],
   controllers: [AppController],
   providers: [AppService],
