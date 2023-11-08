@@ -8,9 +8,6 @@ import { CommerceModule } from './modules/commerce.module';
 import { ProfileModule } from './modules/profile.module';
 import { AuthModule } from './auth/auth.module';
 import { TableModule } from './modules/table.module';
-import * as cors from 'cors';
-import express from 'express';
-import { ExpressAdapter } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -38,10 +35,4 @@ import { ExpressAdapter } from '@nestjs/platform-express';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor() {
-    const server = express();
-    server.use(cors());
-    const app = new ExpressAdapter(server);
-  }
-}
+export class AppModule {}
