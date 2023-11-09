@@ -5,7 +5,6 @@ import { Commerce } from 'src/domain/entities/commerce.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeModule } from './type.module';
 import { ProfileModule } from './profile.module';
-import { TableModule } from './table.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Commerce]), TypeModule, ProfileModule],
