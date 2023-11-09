@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Commerce } from './commerce.entity';
-import { StatusTable } from '../enums/status-table.enum';
 
 @Entity('Tables')
 export class Table {

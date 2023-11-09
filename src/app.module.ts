@@ -8,6 +8,7 @@ import { CommerceModule } from './modules/commerce.module';
 import { ProfileModule } from './modules/profile.module';
 import { AuthModule } from './auth/auth.module';
 import { TableModule } from './modules/table.module';
+import { CategoryModule } from './modules/category.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { TableModule } from './modules/table.module';
     ProfileModule,
     AuthModule,
     TableModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

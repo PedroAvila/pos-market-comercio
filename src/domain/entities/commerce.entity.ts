@@ -9,6 +9,7 @@ import {
 import { Type } from './type.entity';
 import { User } from './user.entity';
 import { Table } from './table.entity';
+import { Category } from './category.entity';
 
 @Entity({ name: 'Commerces' })
 export class Commerce {
@@ -27,4 +28,7 @@ export class Commerce {
 
   @OneToMany(() => Table, (table) => table.Commerce)
   Tables: Table[];
+
+  @OneToMany(() => Category, (category) => category.Commerce)
+  Categories: Category[];
 }

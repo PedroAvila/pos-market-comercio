@@ -31,7 +31,7 @@ export class TableService {
     }
 
     if (exist) {
-      return new HttpException('Table alredy exists', HttpStatus.CONFLICT);
+      return new HttpException('Table alredy exists', HttpStatus.BAD_REQUEST);
     }
 
     table.Status = StatusTable.ENABLED;
