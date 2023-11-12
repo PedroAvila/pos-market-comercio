@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Commerce } from './commerce.entity';
+import { Product } from './product.entity';
 
 @Entity({ name: 'Categories' })
 export class Category {
@@ -21,4 +23,7 @@ export class Category {
   @ManyToOne(() => Commerce, (commerce) => commerce.Categories)
   @JoinColumn({ name: 'CommerceId' })
   Commerce: Commerce;
+
+  @OneToMany(() => Product, (product) => product.Category)
+  Products: Product[];
 }

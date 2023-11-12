@@ -9,6 +9,7 @@ import { ProfileModule } from './modules/profile.module';
 import { AuthModule } from './auth/auth.module';
 import { TableModule } from './modules/table.module';
 import { CategoryModule } from './modules/category.module';
+import { ProductModule } from './modules/product.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { CategoryModule } from './modules/category.module';
     AuthModule,
     TableModule,
     CategoryModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

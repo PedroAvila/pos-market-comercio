@@ -16,7 +16,7 @@ export class CategoryService {
   ) {}
 
   async createCategory(category: CreateCategoryDto) {
-    const categoryFound = await this.commerceService.getCommerce(
+    const commerceFound = await this.commerceService.getCommerce(
       category.CommerceId,
     );
 
@@ -26,7 +26,7 @@ export class CategoryService {
       },
     });
 
-    if (!categoryFound)
+    if (!commerceFound)
       return new HttpException('Category not found', HttpStatus.NOT_FOUND);
 
     if (exist)
