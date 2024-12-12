@@ -15,11 +15,11 @@ import { ProductModule } from './modules/product.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mssql',
-      host: 'my-friends.database.windows.net',
+      host: 'tecsoftware.database.windows.net',
       port: 1433,
       username: 'developer',
-      password: 'LimaPeru46',
-      database: 'market',
+      password: 'lima01@46',
+      database: 'comanda',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       options: {
