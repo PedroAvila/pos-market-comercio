@@ -45,9 +45,4 @@ import { envSchema } from './config/env-schema';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-
-  // constructor(){
-  //   console.log(process.env);
-  // }
-}
+export class AppModule {}
