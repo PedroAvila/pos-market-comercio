@@ -7,7 +7,9 @@ import { CreateCommerce } from "src/application/commerce-use-case/create/create-
 import { GetCommerceResult } from "./get-commerce-result";
 import { GetAllCommerceUseCase } from "src/application/commerce-use-case/getAll/getAll-commerce";
 import { UpdateCommerce } from 'src/application/commerce-use-case/update/update-commerce.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Commerce')
 @Controller("commerces")
 export class CommerceController {
 

@@ -8,8 +8,10 @@ import { GetByIdTypeUseCase } from "src/application/type-use-case/single/getById
 import { UpdateTypeDto } from "src/application/type-use-case/update/update-type.dto";
 import { UpdateTypeUseCase } from "src/application/type-use-case/update/update-type";
 import { DeleteTypeUseCase } from "src/application/type-use-case/delete/delete-type";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller("payments")
+@ApiTags('Type')
+@Controller("types")
 export class TypeController {
 
     constructor(
