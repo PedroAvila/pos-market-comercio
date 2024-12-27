@@ -14,7 +14,9 @@ export class GetAllCommerceUseCase {
 
     async execute(): Promise<{ commerces: GetCommerceResult[] }> {
 
-        const commerceList = await this.commerceRepository.find();
+        const commerceList = await this.commerceRepository.find({
+            relations: ['Type']
+        });
         const result = commerceList.map(commerce => new GetCommerceResult(commerce.CommerceId, commerce.Type.TypeId, commerce.Name));
         return { commerces: result };
     }

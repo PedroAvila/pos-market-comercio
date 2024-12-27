@@ -33,7 +33,7 @@ export class CreateCommerceUseCase {
             },
         });
 
-        if (!commerceFound)
+        if (commerceFound)
             throw new HttpException('Commerce already exists', HttpStatus.CONFLICT);
 
         const newCommerce = new Commerce();
@@ -41,8 +41,8 @@ export class CreateCommerceUseCase {
         newCommerce.Type = type;
 
         const saveCommerce = this.commerceRepository.create(newCommerce);
+        const entity = await this.commerceRepository.save(saveCommerce);
 
-        return { commerce: new CreateCommerceResult(saveCommerce.CommerceId, saveCommerce.Type.TypeId, saveCommerce.Name) };
+        return { commerce: new CreateCommerceResult(entity.CommerceId, entity.Type.TypeId, entity.Name) };
     }
-
 }

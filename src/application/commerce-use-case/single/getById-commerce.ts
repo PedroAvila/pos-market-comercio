@@ -15,6 +15,7 @@ export class GetByIdCommerceUseCase {
     async execute(id: number): Promise<{ commerce: GetByIdCommerceResult }> {
 
         const entity = await this.commerceRepository.findOne({
+            relations: ['Type'],
             where: {
                 CommerceId: id,
             },
