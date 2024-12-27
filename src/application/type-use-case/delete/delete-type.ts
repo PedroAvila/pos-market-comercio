@@ -13,9 +13,14 @@ export class DeleteTypeUseCase {
 
     async execute(id: number): Promise<void> {
 
-        const result = await this.typeRepository.delete({ TypeId: id });
+        const type = await this.typeRepository.findOne({
+            where: {
+                TypeId: id,
+            },
+        });
+        if (!type)
+            throw new HttpException(`Type ${id} not found`, HttpStatus.NOT_FOUND);
 
-        if (result.affected === 0)
-            throw new HttpException('Type not found', HttpStatus.NOT_FOUND);
+        await this.typeRepository.delete({ TypeId: id });
     }
 }

@@ -21,7 +21,7 @@ export class UpdateCommerceUseCase {
         });
 
         if (!commerce)
-            throw new HttpException('Commerce not found', HttpStatus.NOT_FOUND);
+            throw new HttpException(`Commerce ${id} not found`, HttpStatus.NOT_FOUND);
 
         const updateCommerce = Object.assign(commerce, dto);
         await this.commerceRepository.save(updateCommerce);

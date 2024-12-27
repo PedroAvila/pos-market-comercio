@@ -1,7 +1,7 @@
 import { DeleteCommerceUseCase } from './../../../application/commerce-use-case/delete/delete-commerce';
 import { UpdateCommerceUseCase } from './../../../application/commerce-use-case/update/update-commerce';
 import { GetByIdCommerceUseCase } from './../../../application/commerce-use-case/single/getById-commerce';
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
 import { CreateCommerceUseCase } from "src/application/commerce-use-case/create/create-commerce";
 import { CreateCommerce } from "src/application/commerce-use-case/create/create-commerce.dto";
 import { GetCommerceResult } from "./get-commerce-result";
@@ -37,11 +37,13 @@ export class CommerceController {
     }
 
     @Put(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCommerce) {
         return await this.updateCommerceUseCase.execute(id, dto);
     }
 
     @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async delete(@Param('id', ParseIntPipe) id: number) {
         return await this.deleteCommerceUseCase.execute(id);
     }

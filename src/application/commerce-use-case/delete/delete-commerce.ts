@@ -12,9 +12,16 @@ export class DeleteCommerceUseCase {
     ) { }
 
     async execute(id: number): Promise<void> {
-        const result = await this.commerceRepository.delete({ CommerceId: id });
 
-        if (result.affected === 0)
-            throw new HttpException('Commerce not found', HttpStatus.NOT_FOUND);
+        const commerce = await this.commerceRepository.findOne({
+            where: {
+                CommerceId: id,
+            },
+        });
+
+        if (!commerce)
+            throw new HttpException(`Commerce ${id} not found`, HttpStatus.NOT_FOUND);
+
+        await this.commerceRepository.delete({ CommerceId: id });
     }
 }

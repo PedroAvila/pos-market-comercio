@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, ParseIntPipe, Put, Delete, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, ParseIntPipe, Put, Delete, ValidationPipe, HttpCode, HttpStatus } from "@nestjs/common";
 import { CreateTypeUseCase } from "src/application/type-use-case/create/create-type";
 import { CreateTypeDto } from "src/application/type-use-case/create/create-type.dto";
 import { CreateTypeResult } from "./create-type-result";
@@ -38,11 +38,13 @@ export class TypeController {
     };
 
     @Put(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async update(@Param('id') id: number, @Body() type: UpdateTypeDto) {
         return await this.updateTypeUseCase.execute(id, type);
     }
 
     @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async delete(@Param('id', ParseIntPipe) id: number) {
         return await this.deleteTypeUseCase.execute(id);
     }
