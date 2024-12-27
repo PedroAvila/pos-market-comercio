@@ -21,7 +21,7 @@ export class UpdateTypeUseCase {
         });
 
         if (!typeFound)
-            throw new HttpException('Type not found', HttpStatus.NOT_FOUND);
+            throw new HttpException(`Type ${id} not found`, HttpStatus.NOT_FOUND);
 
         const updateType = Object.assign(typeFound, type);
         await this.typeRepository.save(updateType);
