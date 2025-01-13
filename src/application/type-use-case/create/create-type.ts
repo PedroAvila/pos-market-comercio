@@ -3,10 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Type } from "src/domain/entities/type.entity";
 import { Repository } from "typeorm";
 import { CreateTypeDto } from "./create-type.dto";
-import { CreateTypeResult } from "src/infrastructure/api/type/create-type-result";
+import { ICreateTypeUseCase } from "./create-type.interface";
+import { CreateTypeResult } from "src/infrastructure/api/type";
 
 @Injectable()
-export class CreateTypeUseCase {
+export class CreateTypeUseCase implements ICreateTypeUseCase {
 
     constructor(
         @InjectRepository(Type)

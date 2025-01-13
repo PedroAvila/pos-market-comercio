@@ -1,7 +1,8 @@
 import { QueueClient, QueueServiceClient } from "@azure/storage-queue";
+import { Injectable } from "@nestjs/common";
 import { IAzureQueuePort } from "src/domain/ports/azure-queue-port";
 
-
+@Injectable()
 export class AzureQueueAdapter implements IAzureQueuePort {
 
     private queueClient: QueueClient;
@@ -12,6 +13,7 @@ export class AzureQueueAdapter implements IAzureQueuePort {
 
         const queueServiceClient = QueueServiceClient.fromConnectionString(connectionString);
         this.queueClient = queueServiceClient.getQueueClient(queueName);
+        this.initializeQueue();
     }
 
     private async initializeQueue(): Promise<void> {
@@ -38,7 +40,6 @@ export class AzureQueueAdapter implements IAzureQueuePort {
             console.log(`Mensaje con ID ${message.messageId} eliminado`);
         }
     }
-
 }
 
 

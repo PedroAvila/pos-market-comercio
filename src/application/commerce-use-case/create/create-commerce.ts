@@ -3,11 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Commerce } from "src/domain/entities/commerce.entity";
 import { Repository } from "typeorm";
 import { CreateCommerce } from "./create-commerce.dto";
-import { CreateCommerceResult } from "src/infrastructure/api/commerce/create-commerce-result";
 import { Type } from "src/domain/entities/type.entity";
+import { ICreateCommerceUseCase } from "./create-commerce.interface";
+import { CreateCommerceResult } from "src/infrastructure/api/commerce";
 
 @Injectable()
-export class CreateCommerceUseCase {
+export class CreateCommerceUseCase implements ICreateCommerceUseCase {
 
     constructor(
         @InjectRepository(Commerce)

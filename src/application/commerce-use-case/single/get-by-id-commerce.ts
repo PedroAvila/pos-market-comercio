@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Commerce } from "src/domain/entities/commerce.entity";
-import { GetByIdCommerceResult } from "src/infrastructure/api/commerce/getById-commerce-result";
+import { GetByIdCommerceResult } from "src/infrastructure/api/commerce";
 import { Repository } from "typeorm";
+import { IGetByIdCommerceUseCase } from "./get-by-id-commerce.interface";
 
 @Injectable()
-export class GetByIdCommerceUseCase {
+export class GetByIdCommerceUseCase implements IGetByIdCommerceUseCase {
 
     constructor(
         @InjectRepository(Commerce)

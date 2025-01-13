@@ -2,9 +2,10 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Type } from "src/domain/entities/type.entity";
 import { Repository } from "typeorm";
+import { IDeleteTypeUseCase } from "./delete-type.interface";
 
 @Injectable()
-export class DeleteTypeUseCase {
+export class DeleteTypeUseCase implements IDeleteTypeUseCase {
 
     constructor(
         @InjectRepository(Type)

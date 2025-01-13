@@ -1,10 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CreateTypeUseCase } from 'src/application/type-use-case/create/create-type';
-import { DeleteTypeUseCase } from 'src/application/type-use-case/delete/delete-type';
-import { GetAllTypeUseCase } from 'src/application/type-use-case/getAll/getAll-type';
-import { GetByIdTypeUseCase } from 'src/application/type-use-case/single/getById-type';
-import { UpdateTypeUseCase } from 'src/application/type-use-case/update/update-type';
+import { CreateTypeUseCase, DeleteTypeUseCase, GetAllTypeUseCase, GetByIdTypeUseCase, UpdateTypeUseCase } from 'src/application/type-use-case';
 import { Type } from 'src/domain/entities/type.entity';
 import { TypeService } from 'src/domain/services/type.service';
 import { AzureQueueAdapter } from 'src/infrastructure/adapters/azure-queue-adapter';
@@ -14,11 +10,26 @@ import { TypeController } from 'src/infrastructure/api/type/type.controller';
   imports: [TypeOrmModule.forFeature([Type])],
   controllers: [TypeController],
   providers: [
-    CreateTypeUseCase,
-    DeleteTypeUseCase,
-    GetAllTypeUseCase,
-    GetByIdTypeUseCase,
-    UpdateTypeUseCase,
+    {
+      provide: 'ICreateTypeUseCase',
+      useClass: CreateTypeUseCase
+    },
+    {
+      provide: 'IGetTypeUseCase',
+      useClass: GetAllTypeUseCase
+    },
+    {
+      provide: 'IGetByIdTypeUseCase',
+      useClass: GetByIdTypeUseCase
+    },
+    {
+      provide: 'IUpdateTypeUseCase',
+      useClass: UpdateTypeUseCase
+    },
+    {
+      provide: 'IDeleteTypeUseCase',
+      useClass: DeleteTypeUseCase
+    },
     {
       provide: 'ITypeServicePort',
       useClass: TypeService
@@ -28,6 +39,6 @@ import { TypeController } from 'src/infrastructure/api/type/type.controller';
       useClass: AzureQueueAdapter
     }
   ],
-  exports: [TypeOrmModule, CreateTypeUseCase, DeleteTypeUseCase, GetAllTypeUseCase, GetByIdTypeUseCase, UpdateTypeUseCase],
+  exports: [TypeOrmModule,],
 })
 export class TypeModule { }

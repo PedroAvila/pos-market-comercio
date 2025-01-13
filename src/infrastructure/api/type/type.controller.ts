@@ -1,25 +1,25 @@
-import { Body, Controller, Get, Param, Post, ParseIntPipe, Put, Delete, ValidationPipe, HttpCode, HttpStatus } from "@nestjs/common";
-import { CreateTypeUseCase } from "src/application/type-use-case/create/create-type";
-import { CreateTypeDto } from "src/application/type-use-case/create/create-type.dto";
+import { Body, Controller, Get, Param, Post, ParseIntPipe, Put, Delete, ValidationPipe, HttpCode, HttpStatus, Inject } from "@nestjs/common";
 import { CreateTypeResult } from "./create-type-result";
 import { GetTypeResult } from "./get-type.dto";
-import { GetAllTypeUseCase } from "src/application/type-use-case/getAll/getAll-type";
-import { GetByIdTypeUseCase } from "src/application/type-use-case/single/getById-type";
-import { UpdateTypeDto } from "src/application/type-use-case/update/update-type.dto";
-import { UpdateTypeUseCase } from "src/application/type-use-case/update/update-type";
-import { DeleteTypeUseCase } from "src/application/type-use-case/delete/delete-type";
 import { ApiTags } from "@nestjs/swagger";
+import { CreateTypeDto, ICreateTypeUseCase, IDeleteTypeUseCase, IGetByIdTypeUseCase, IGetTypeUseCase, IUpdateTypeUseCase, UpdateTypeDto } from "src/application/type-use-case";
+
 
 @ApiTags('Type')
 @Controller("types")
 export class TypeController {
 
     constructor(
-        private createTypeUseCase: CreateTypeUseCase,
-        private getAllTypeUseCase: GetAllTypeUseCase,
-        private getByIdTypeUseCase: GetByIdTypeUseCase,
-        private updateTypeUseCase: UpdateTypeUseCase,
-        private deleteTypeUseCase: DeleteTypeUseCase,
+        @Inject('ICreateTypeUseCase')
+        private createTypeUseCase: ICreateTypeUseCase,
+        @Inject('IGetTypeUseCase')
+        private getAllTypeUseCase: IGetTypeUseCase,
+        @Inject('IGetByIdTypeUseCase')
+        private getByIdTypeUseCase: IGetByIdTypeUseCase,
+        @Inject('IUpdateTypeUseCase')
+        private updateTypeUseCase: IUpdateTypeUseCase,
+        @Inject('IDeleteTypeUseCase')
+        private deleteTypeUseCase: IDeleteTypeUseCase,
     ) { }
 
     @Get()

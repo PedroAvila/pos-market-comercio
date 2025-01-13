@@ -1,11 +1,13 @@
-import { GetByIdTypeResult } from './../../../infrastructure/api/type/getById-type-result';
+
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Type } from "src/domain/entities/type.entity";
 import { Repository } from "typeorm";
+import { IGetByIdTypeUseCase } from './get-by-id-type.interface';
+import { GetByIdTypeResult } from "src/infrastructure/api/type";
 
 @Injectable()
-export class GetByIdTypeUseCase {
+export class GetByIdTypeUseCase implements IGetByIdTypeUseCase {
 
     constructor(
         @InjectRepository(Type)

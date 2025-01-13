@@ -1,24 +1,31 @@
-import { DeleteCommerceUseCase } from './../../../application/commerce-use-case/delete/delete-commerce';
-import { UpdateCommerceUseCase } from './../../../application/commerce-use-case/update/update-commerce';
-import { GetByIdCommerceUseCase } from './../../../application/commerce-use-case/single/getById-commerce';
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
-import { CreateCommerceUseCase } from "src/application/commerce-use-case/create/create-commerce";
-import { CreateCommerce } from "src/application/commerce-use-case/create/create-commerce.dto";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common";
 import { GetCommerceResult } from "./get-commerce-result";
-import { GetAllCommerceUseCase } from "src/application/commerce-use-case/getAll/getAll-commerce";
-import { UpdateCommerce } from 'src/application/commerce-use-case/update/update-commerce.dto';
 import { ApiTags } from '@nestjs/swagger';
+import {
+    CreateCommerce,
+    ICreateCommerceUseCase,
+    IDeleteCommerceUseCase,
+    IGetByIdCommerceUseCase,
+    IGetCommerceUseCase,
+    IUpdateCommerceUseCase,
+    UpdateCommerce
+} from 'src/application/commerce-use-case';
 
 @ApiTags('Commerce')
 @Controller("commerces")
 export class CommerceController {
 
     constructor(
-        private createCommerceUseCase: CreateCommerceUseCase,
-        private getAllCommerceUseCase: GetAllCommerceUseCase,
-        private getByIdCommerceUseCase: GetByIdCommerceUseCase,
-        private updateCommerceUseCase: UpdateCommerceUseCase,
-        private deleteCommerceUseCase: DeleteCommerceUseCase
+        @Inject('ICreateCommerceUseCase')
+        private createCommerceUseCase: ICreateCommerceUseCase,
+        @Inject('IGetCommerceUseCase')
+        private getAllCommerceUseCase: IGetCommerceUseCase,
+        @Inject('IGetByIdCommerceUseCase')
+        private getByIdCommerceUseCase: IGetByIdCommerceUseCase,
+        @Inject('IUpdateCommerceUseCase')
+        private updateCommerceUseCase: IUpdateCommerceUseCase,
+        @Inject('IDeleteCommerceUseCase')
+        private deleteCommerceUseCase: IDeleteCommerceUseCase
     ) { }
 
     @Get()

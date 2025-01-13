@@ -3,9 +3,10 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Type } from "src/domain/entities/type.entity";
 import { Repository } from "typeorm";
 import { UpdateTypeDto } from "./update-type.dto";
+import { IUpdateTypeUseCase } from "./update-type.interface";
 
 @Injectable()
-export class UpdateTypeUseCase {
+export class UpdateTypeUseCase implements IUpdateTypeUseCase {
 
     constructor(
         @InjectRepository(Type)

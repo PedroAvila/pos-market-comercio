@@ -2,9 +2,10 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Commerce } from "src/domain/entities/commerce.entity";
 import { Repository } from "typeorm";
+import { IDeleteCommerceUseCase } from "./delete-commerce.interface";
 
 @Injectable()
-export class DeleteCommerceUseCase {
+export class DeleteCommerceUseCase implements IDeleteCommerceUseCase {
 
     constructor(
         @InjectRepository(Commerce)
