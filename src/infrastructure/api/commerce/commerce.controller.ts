@@ -28,7 +28,7 @@ export class CommerceController {
         private deleteCommerceUseCase: IDeleteCommerceUseCase
     ) { }
 
-    @Get()
+    @Get()//comentario
     async getAll(): Promise<{ commerces: GetCommerceResult[] }> {
         return await this.getAllCommerceUseCase.execute();
     }
