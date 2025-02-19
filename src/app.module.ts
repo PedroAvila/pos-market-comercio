@@ -6,6 +6,10 @@ import { TypeModule } from './modules/type.module';
 import { CommerceModule } from './modules/commerce.module';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './config/env-schema';
+import { KeyVaultService } from './domain/services/keyvault.service';
+import { KeyVaultController } from './infrastructure/api/keyvault/keyvault.controller';
+import { PdfModule } from './modules/pdf.module';
+
 
 @Module({
   imports: [
@@ -29,8 +33,9 @@ import { envSchema } from './config/env-schema';
     }),
     TypeModule,
     CommerceModule,
+    PdfModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, KeyVaultController],
+  providers: [AppService, KeyVaultService],
 })
 export class AppModule { }

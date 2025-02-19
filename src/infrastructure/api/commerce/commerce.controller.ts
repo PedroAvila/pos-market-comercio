@@ -10,6 +10,7 @@ import {
     IUpdateCommerceUseCase,
     UpdateCommerce
 } from 'src/application/commerce-use-case';
+import { HttpCustomService } from "src/domain/services/http.service";
 
 @ApiTags('Commerce')
 @Controller("commerces")
@@ -25,10 +26,16 @@ export class CommerceController {
         @Inject('IUpdateCommerceUseCase')
         private updateCommerceUseCase: IUpdateCommerceUseCase,
         @Inject('IDeleteCommerceUseCase')
-        private deleteCommerceUseCase: IDeleteCommerceUseCase
+        private deleteCommerceUseCase: IDeleteCommerceUseCase,
+        private httpCustomService: HttpCustomService,
     ) { }
 
-    @Get()//comentario
+    @Get('lista')
+    async listApi() {
+        return await this.httpCustomService.findAll();
+    }
+
+    @Get()
     async getAll(): Promise<{ commerces: GetCommerceResult[] }> {
         return await this.getAllCommerceUseCase.execute();
     }
@@ -37,6 +44,8 @@ export class CommerceController {
     async single(@Param('id', ParseIntPipe) id: number) {
         return await this.getByIdCommerceUseCase.execute(id);
     }
+
+
 
     @Post()
     async create(@Body(ValidationPipe) dto: CreateCommerce) {

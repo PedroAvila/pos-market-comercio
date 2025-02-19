@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-import { join } from 'path';
 
 export const envSchema = Joi.object({
 
@@ -10,6 +9,7 @@ export const envSchema = Joi.object({
     DB_PASSWORD: Joi.string().required(),
     DB_DATABASE: Joi.string().required(),
     PORT: Joi.number().required(),
-    NODE_ENV: Joi.string().required()
+    NODE_ENV: Joi.string().required(),
+    HTTP_RICKANDMORTY_API: Joi.string().required(),
 
 });
