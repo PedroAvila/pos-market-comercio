@@ -4,17 +4,19 @@ import { Order } from "./orderDto";
 import { PeekMessageResultDto } from "./peekMessageResultDto";
 
 const queueName = "appqueue";
-const connectionString = process.env.AZURE_SERVICE_BUS_CONNECTION_STRING;
+//const connectionString = process.env.AZURE_SERVICE_BUS_CONNECTION_STRING;
 
 @Injectable()
 export class ServiceBusService implements OnModuleDestroy {
 
+    private connectionString: string;
     private serviceBusClient: ServiceBusClient;
     private sender: ServiceBusSender;
     private receiver: ServiceBusReceiver;
 
     constructor(){
-        this.serviceBusClient = new ServiceBusClient(connectionString);
+        this.connectionString = process.env.AZURE_SERVICE_BUS_CONNECTION_STRING;
+        this.serviceBusClient = new ServiceBusClient(this.connectionString);
         this.sender = this.serviceBusClient.createSender(queueName);
         this.receiver = this.serviceBusClient.createReceiver(queueName);
     }

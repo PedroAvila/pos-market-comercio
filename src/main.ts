@@ -5,8 +5,6 @@ import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 dotenv.config();
-console.log('AZURE_SERVICE_BUS_CONNECTION_STRING:', process.env.AZURE_SERVICE_BUS_CONNECTION_STRING);
-console.log('KEY_VAULT_URL:', process.env.KEY_VAULT_URL);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
