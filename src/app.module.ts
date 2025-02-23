@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeModule } from './modules/type.module';
@@ -9,6 +8,7 @@ import { envSchema } from './config/env-schema';
 import { KeyVaultService } from './domain/services/keyvault.service';
 import { KeyVaultController } from './infrastructure/api/keyvault/keyvault.controller';
 import { PdfModule } from './modules/pdf.module';
+import { ServicebusModule } from './modules/servicebus.module';
 
 
 @Module({
@@ -33,9 +33,10 @@ import { PdfModule } from './modules/pdf.module';
     }),
     TypeModule,
     CommerceModule,
-    PdfModule
+    PdfModule,
+    ServicebusModule
   ],
-  controllers: [AppController, KeyVaultController],
+  controllers: [KeyVaultController],
   providers: [AppService, KeyVaultService],
 })
 export class AppModule { }

@@ -10,8 +10,7 @@ export class KeyVaultService implements OnModuleInit {
     constructor(){}
 
     async onModuleInit() {
-        const keyVaultName = process.env.KEY_VAULT_NAME;
-        const keyVaultUrl = 'https://appvault400004.vault.azure.net/';
+        const keyVaultUrl = process.env.KEY_VAULT_URL;
 
         // Autenticacion con Azure
         const credential = new DefaultAzureCredential();
